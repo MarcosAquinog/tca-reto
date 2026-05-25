@@ -344,7 +344,6 @@ def his10_tab():
         with col4:
             st.metric("F1-Score", f"{metrics_his10.get('metrics', {}).get('f1_score', 0):.3f}")
 
-    st.markdown("<div class='form-section'>", unsafe_allow_html=True)
     st.subheader("Ingresa los datos del paciente")
 
     col1, col2, col3 = st.columns(3)
@@ -360,8 +359,6 @@ def his10_tab():
 
     with col3:
         m_cp = st.text_input("Código Postal", placeholder="Ej: 28001")
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
     if st.button("Predecir Inasistencia", use_container_width=True):
         if not all([m_num_exp, med, esp, m_cp]):
@@ -424,7 +421,6 @@ def his05_tab():
         with col4:
             st.metric("Features", f"{metrics_his05.get('n_features', 0)}")
 
-    st.markdown("<div class='form-section'>", unsafe_allow_html=True)
     st.subheader("Ingresa los datos del paciente")
 
     col1, col2, col3 = st.columns(3)
@@ -439,8 +435,6 @@ def his05_tab():
     with col2:
         p_fec_lld = st.date_input("Fecha de Llegada (HIS-05)")
         p_hra_lld = st.time_input("Hora de Llegada (HIS-05)")
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
     if st.button("Estimar Tiempo de Espera", use_container_width=True):
         if not all([p_num_exp, p_area]):
