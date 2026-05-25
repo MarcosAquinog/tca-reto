@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import date, datetime
+import bcrypt
 
 st.set_page_config(
     page_title="TCA Software Solutions",
@@ -158,12 +159,92 @@ button:active {
 
 st.markdown(CSS, unsafe_allow_html=True)
 
+DEFAULT_USERS = {
+    "admin": "admin123",
+    "demo": "demo123"
+}
+
+def hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+def verify_password(password: str, password_hash: str) -> bool:
+    return bcrypt.checkpw(password.encode(), password_hash.encode())
+
+def login():
+    st.markdown("""
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #21262D;
+            border-left: 4px solid #0066CC;
+        }
+        .login-title {
+            color: #0066CC;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .login-subtitle {
+            color: #8B949E;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown('<div class="login-title">TCA Software Solutions</div>', unsafe_allow_html=True)
+        st.markdown('<div class="login-subtitle">Portal de Predicciones Hospitalarias</div>', unsafe_allow_html=True)
+
+        username = st.text_input("Usuario", key="login_user")
+        password = st.text_input("Contraseña", type="password", key="login_pass")
+
+        if st.button("Ingresar", key="login_btn", use_container_width=True):
+            if username in DEFAULT_USERS and DEFAULT_USERS[username] == password:
+                st.session_state.logged_in = True
+                st.session_state.username = username
+                st.rerun()
+            else:
+                st.error("Usuario o contraseña incorrectos")
+
+        st.markdown("---")
+        st.info("""
+        **Usuarios de prueba:**
+        - Usuario: admin | Contraseña: admin123
+        - Usuario: demo | Contraseña: demo123
+        """)
+
+def check_authentication():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
+
+    if not st.session_state.logged_in:
+        login()
+        st.stop()
+
+st.markdown(CSS, unsafe_allow_html=True)
+
 @st.cache_resource
 def load_models():
     return None, None, {"metrics": {"roc_auc": 0.92, "precision": 0.89, "recall": 0.85, "f1_score": 0.87}}, {"oof_R2": 0.78, "oof_MAE": 45.3, "oof_RMSE": 62.1, "n_features": 24}
 
 
 def sidebar():
+    st.sidebar.markdown("---")
+    st.sidebar.markdown(f"Bienvenido, **{st.session_state.username}**")
+    st.sidebar.markdown("---")
+
+    if st.sidebar.button("Cerrar sesión", use_container_width=True):
+        st.session_state.logged_in = False
+        st.session_state.username = None
+        st.rerun()
+
     st.sidebar.markdown("---")
     st.sidebar.markdown("### Información de la Plataforma")
     st.sidebar.info("""
@@ -240,9 +321,6 @@ def home_page():
             </ul>
         </div>
         """, unsafe_allow_html=True)
-
-    st.markdown("---")
-    st.info("Utiliza el menú de la izquierda para acceder a las soluciones.")
 
 
 def his10_tab():
@@ -411,6 +489,7 @@ def his05_tab():
 
 
 def main():
+    check_authentication()
     sidebar()
 
     tab1, tab2, tab3 = st.tabs(["Inicio", "HIS-10: No-Show", "HIS-05: Tiempos"])
