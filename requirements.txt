@@ -9,3 +9,5 @@ bcrypt>=3.2.0
 kedro>=1.4.0
 kedro-datasets>=9.0.0
 pyarrow>=10.0.0
+jinja2>=3.0.0
+pyyaml>=5.4.0
