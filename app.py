@@ -96,7 +96,8 @@ body {
     padding: 28px;
     border-radius: 16px;
     margin-bottom: 24px;
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .result-box {
@@ -106,7 +107,18 @@ body {
     border-top: 5px solid var(--primary);
     margin-top: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
+}
+
+.result-box h3 {
+    color: var(--text);
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.result-box p {
+    color: var(--text);
+    margin: 8px 0;
 }
 
 .prediction-high-risk {
