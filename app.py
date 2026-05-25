@@ -17,12 +17,12 @@ CSS = """
     --primary-dark: #004999;
     --success: #27AE60;
     --danger: #E74C3C;
-    --bg-main: #F8FAFB;
-    --bg-card: #FFFFFF;
-    --bg-light: #F0F3F7;
-    --border-color: #E0E5ED;
-    --text: #1A1F2E;
-    --text-secondary: #6B7280;
+    --bg-main: #0E1117;
+    --bg-card: #161B22;
+    --bg-light: #21262D;
+    --border-color: #30363D;
+    --text: #C9D1D9;
+    --text-secondary: #8B949E;
 }
 
 * {
@@ -298,12 +298,12 @@ def his10_tab():
                 risk_color = "#E74C3C" if prediccion else "#27AE60"
 
                 st.markdown(f"""
-                <div class="result-box {risk_class}" style="color: #1A1F2E;">
-                    <h3 style="color: #1A1F2E; margin-top: 0;">Resultado de Predicción</h3>
-                    <p style="color: #1A1F2E;"><strong>Probabilidad de Inasistencia:</strong> <span style="color: {risk_color}; font-size: 24px; font-weight: bold;">{proba:.1%}</span></p>
-                    <p style="color: #1A1F2E;"><strong>Clasificación:</strong> <span style="color: {risk_color}; font-weight: bold;">{risk_text}</span></p>
-                    <p style="color: #1A1F2E;"><strong>Expediente:</strong> {m_num_exp}</p>
-                    <p style="color: #1A1F2E;"><strong>Especialidad:</strong> {esp}</p>
+                <div class="result-box {risk_class}" style="color: #C9D1D9;">
+                    <h3 style="color: #C9D1D9; margin-top: 0;">Resultado de Predicción</h3>
+                    <p style="color: #C9D1D9;"><strong>Probabilidad de Inasistencia:</strong> <span style="color: {risk_color}; font-size: 24px; font-weight: bold;">{proba:.1%}</span></p>
+                    <p style="color: #C9D1D9;"><strong>Clasificación:</strong> <span style="color: {risk_color}; font-weight: bold;">{risk_text}</span></p>
+                    <p style="color: #C9D1D9;"><strong>Expediente:</strong> {m_num_exp}</p>
+                    <p style="color: #C9D1D9;"><strong>Especialidad:</strong> {esp}</p>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -376,13 +376,13 @@ def his05_tab():
                 severity_text = "CRÍTICO" if severity == "high" else "MODERADO" if severity == "medium" else "NORMAL"
 
                 st.markdown(f"""
-                <div class="result-box" style="color: #1A1F2E;">
-                    <h3 style="color: #1A1F2E; margin-top: 0;">Estimación de Tiempo de Espera</h3>
-                    <p style="color: #1A1F2E;"><strong>Tiempo Estimado:</strong> <span style="color: {severity_color}; font-size: 28px; font-weight: bold;">{tiempo_minutos:.0f} min</span></p>
-                    <p style="color: #1A1F2E;"><strong>Severidad:</strong> <span style="color: {severity_color}; font-weight: bold;">{severity_text}</span></p>
-                    <p style="color: #1A1F2E;"><strong>Área:</strong> {p_area}</p>
-                    <p style="color: #1A1F2E;"><strong>Nivel de Triage:</strong> {triage_nivel}</p>
-                    <p style="color: #1A1F2E;"><strong>Hora de Llegada:</strong> {p_hra_lld}</p>
+                <div class="result-box" style="color: #C9D1D9;">
+                    <h3 style="color: #C9D1D9; margin-top: 0;">Estimación de Tiempo de Espera</h3>
+                    <p style="color: #C9D1D9;"><strong>Tiempo Estimado:</strong> <span style="color: {severity_color}; font-size: 28px; font-weight: bold;">{tiempo_minutos:.0f} min</span></p>
+                    <p style="color: #C9D1D9;"><strong>Severidad:</strong> <span style="color: {severity_color}; font-weight: bold;">{severity_text}</span></p>
+                    <p style="color: #C9D1D9;"><strong>Área:</strong> {p_area}</p>
+                    <p style="color: #C9D1D9;"><strong>Nivel de Triage:</strong> {triage_nivel}</p>
+                    <p style="color: #C9D1D9;"><strong>Hora de Llegada:</strong> {p_hra_lld}</p>
                 </div>
                 """, unsafe_allow_html=True)
 
