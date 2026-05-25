@@ -213,13 +213,6 @@ def login():
             else:
                 st.error("Usuario o contraseña incorrectos")
 
-        st.markdown("---")
-        st.info("""
-        **Usuarios de prueba:**
-        - Usuario: admin | Contraseña: admin123
-        - Usuario: demo | Contraseña: demo123
-        """)
-
 def check_authentication():
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
