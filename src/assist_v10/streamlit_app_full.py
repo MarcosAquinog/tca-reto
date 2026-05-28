@@ -299,7 +299,7 @@ def home_page():
 
 def his10_tab():
     """Pestaña HIS-10: No-Show Guard."""
-    model_his10, _, metrics_his10, _ = load_models()
+    model_his10, _, _, _ = load_models()
 
     st.markdown("""
     <div class="header-section">
@@ -307,17 +307,6 @@ def his10_tab():
         <p class="header-subtitle">Predicción de Inasistencias a Citas</p>
     </div>
     """, unsafe_allow_html=True)
-
-    if metrics_his10:
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("ROC-AUC", f"{metrics_his10.get('metrics', {}).get('roc_auc', 0):.3f}")
-        with col2:
-            st.metric("Precision", f"{metrics_his10.get('metrics', {}).get('precision', 0):.3f}")
-        with col3:
-            st.metric("Recall", f"{metrics_his10.get('metrics', {}).get('recall', 0):.3f}")
-        with col4:
-            st.metric("F1-Score", f"{metrics_his10.get('metrics', {}).get('f1_score', 0):.3f}")
 
     st.markdown("<div class='form-section'>", unsafe_allow_html=True)
     st.subheader("Ingresa los datos del paciente")
@@ -410,7 +399,7 @@ def his10_tab():
 
 def his05_tab():
     """Pestaña HIS-05: Monitor de Tiempos de Espera."""
-    _, model_his05, _, metrics_his05 = load_models()
+    _, model_his05, _, _ = load_models()
 
     st.markdown("""
     <div class="header-section">
@@ -418,17 +407,6 @@ def his05_tab():
         <p class="header-subtitle">Estimación de Saturación Hospitalaria</p>
     </div>
     """, unsafe_allow_html=True)
-
-    if metrics_his05:
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("R² OOF", f"{metrics_his05.get('oof_R2', 0):.3f}")
-        with col2:
-            st.metric("MAE (minutos)", f"{metrics_his05.get('oof_MAE', 0):.1f}")
-        with col3:
-            st.metric("RMSE (minutos)", f"{metrics_his05.get('oof_RMSE', 0):.1f}")
-        with col4:
-            st.metric("Features", f"{metrics_his05.get('n_features', 0)}")
 
     st.markdown("<div class='form-section'>", unsafe_allow_html=True)
     st.subheader("Ingresa los datos del paciente")
