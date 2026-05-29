@@ -353,6 +353,17 @@ def his10_tab():
     with col3:
         m_cp = st.text_input("Código Postal", placeholder="Ej: 28001")
 
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        conflicto = st.checkbox("Conflicto")
+
+    with col2:
+        agregada = st.checkbox("Agregada")
+
+    with col3:
+        ultimahora = st.checkbox("Última Hora")
+
     if st.button("Predecir Inasistencia", use_container_width=True):
         if not all([m_num_exp, med, esp, m_cp]):
             st.error("Por favor completa todos los campos requeridos")
