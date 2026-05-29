@@ -325,6 +325,17 @@ def his10_tab():
     with col3:
         m_cp = st.text_input("Código Postal", placeholder="Ej: 28001")
 
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        conflicto = st.checkbox("Conflicto")
+
+    with col2:
+        agregada = st.checkbox("Agregada")
+
+    with col3:
+        ultimahora = st.checkbox("Última Hora")
+
     st.markdown("</div>", unsafe_allow_html=True)
 
     if st.button("Predecir Inasistencia", use_container_width=True):
@@ -341,7 +352,10 @@ def his10_tab():
                         "med": med,
                         "esp": esp,
                         "probabilidad_noshow": proba,
-                        "prediccion_noshow": prediccion
+                        "prediccion_noshow": prediccion,
+                        "conflicto": conflicto,
+                        "agregada": agregada,
+                        "ultimahora": ultimahora
                     }
 
                     save_prediction_his10(st.session_state.username, result_data)
