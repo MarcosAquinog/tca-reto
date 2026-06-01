@@ -247,7 +247,7 @@ def load_models():
             blob_client_his10 = BlobClient.from_connection_string(
                 connection_string,
                 container_name="models",
-                blob_name="HIS-10/2026-06-01_v1/model.pkl"
+                blob_name="models/HIS-10/2026-06-01_v1/model.pkl"
             )
             model_his10 = pickle.loads(blob_client_his10.download_blob().readall())
 
@@ -255,7 +255,7 @@ def load_models():
             blob_client_his05 = BlobClient.from_connection_string(
                 connection_string,
                 container_name="models",
-                blob_name="HIS-05/2026-06-01_v1/model.pkl"
+                blob_name="models/HIS-05/2026-06-01_v1/model.pkl"
             )
             model_his05 = pickle.loads(blob_client_his05.download_blob().readall())
 
@@ -263,7 +263,7 @@ def load_models():
             blob_client_metrics_his10 = BlobClient.from_connection_string(
                 connection_string,
                 container_name="models",
-                blob_name="HIS-10/2026-06-01_v1/metrics.json"
+                blob_name="models/HIS-10/2026-06-01_v1/metrics.json"
             )
             metrics_his10 = json.loads(blob_client_metrics_his10.download_blob().readall())
 
@@ -271,7 +271,7 @@ def load_models():
             blob_client_metrics_his05 = BlobClient.from_connection_string(
                 connection_string,
                 container_name="models",
-                blob_name="HIS-05/2026-06-01_v1/metrics.json"
+                blob_name="models/HIS-05/2026-06-01_v1/metrics.json"
             )
             metrics_his05 = json.loads(blob_client_metrics_his05.download_blob().readall())
 
