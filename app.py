@@ -4,6 +4,11 @@ import pandas as pd
 import numpy as np
 from datetime import date, datetime
 import bcrypt
+import os
+from dotenv import load_dotenv
+
+# Cargar variables del .env
+load_dotenv()
 
 st.set_page_config(
     page_title="TCA Software Solutions",
