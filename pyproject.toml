@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tca-reto"
+version = "0.1.0"
+description = "TCA Hospital Optimization Platform"
+
+[tool.kedro]
+project_name = "tca-reto"
+kedro_init_version = "1.4.0"
+package_name = "assist_v10"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+
+
+[tool.kedro_telemetry]
+project_id = "220b68752fb54fc0ad910fc3c82451a8"

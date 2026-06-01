@@ -223,9 +223,62 @@ def check_authentication():
 
 st.markdown(CSS, unsafe_allow_html=True)
 
+import os
+import pickle
+import json
+
 @st.cache_resource
 def load_models():
-    return None, None, {"metrics": {"roc_auc": 0.92, "precision": 0.89, "recall": 0.85, "f1_score": 0.87}}, {"oof_R2": 0.78, "oof_MAE": 45.3, "oof_RMSE": 62.1, "n_features": 24}
+    """Carga modelos desde Azure Blob Storage o local."""
+    connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+
+    if connection_string:
+        try:
+            from azure.storage.blob import BlobClient
+
+            st.write("📦 Cargando modelos desde Azure Blob Storage...")
+
+            # HIS-10
+            blob_client_his10 = BlobClient.from_connection_string(
+                connection_string,
+                container_name="models",
+                blob_name="HIS-10/2026-06-01_v1/model.pkl"
+            )
+            model_his10 = pickle.loads(blob_client_his10.download_blob().readall())
+
+            # HIS-05
+            blob_client_his05 = BlobClient.from_connection_string(
+                connection_string,
+                container_name="models",
+                blob_name="HIS-05/2026-06-01_v1/model.pkl"
+            )
+            model_his05 = pickle.loads(blob_client_his05.download_blob().readall())
+
+            # Metrics HIS-10
+            blob_client_metrics_his10 = BlobClient.from_connection_string(
+                connection_string,
+                container_name="models",
+                blob_name="HIS-10/2026-06-01_v1/metrics.json"
+            )
+            metrics_his10 = json.loads(blob_client_metrics_his10.download_blob().readall())
+
+            # Metrics HIS-05
+            blob_client_metrics_his05 = BlobClient.from_connection_string(
+                connection_string,
+                container_name="models",
+                blob_name="HIS-05/2026-06-01_v1/metrics.json"
+            )
+            metrics_his05 = json.loads(blob_client_metrics_his05.download_blob().readall())
+
+            st.success("✓ Modelos cargados desde Blob")
+            return model_his10, model_his05, metrics_his10, metrics_his05
+
+        except Exception as e:
+            st.warning(f"⚠ No se pudieron cargar modelos desde Blob: {e}")
+            return None, None, None, None
+    else:
+        st.info("Modo local: Usando métricas simuladas")
+        return None, None, {"metrics": {"roc_auc": 0.92, "precision": 0.89, "recall": 0.85, "f1_score": 0.87}}, {"oof_R2": 0.78, "oof_MAE": 45.3, "oof_RMSE": 62.1, "n_features": 24}
 
 
 def sidebar():
